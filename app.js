@@ -30,46 +30,45 @@ const reviews = [
   },
 ];
 
-const img = document.getElementById('person-img');
-const author = document.getElementById('author');
-const job = document.getElementById('job');
-const info = document.getElementById('info');
+const img = document.getElementById('person-img')
+const author = document.getElementById('author')
+const job = document.getElementById('job')
+const info = document.getElementById('info')
 
-const prevBtn = document.querySelector('.prev-button')
-const nextBtn = document.querySelector('.next-button')
+const prevBtn = document.querySelector('.prev-btn')
+const nextBtn = document.querySelector('.next-btn')
 const randomBtn = document.querySelector('.random-btn')
 
-let currentItem = 1;
+let index = 1;
 
-window.addEventListener('DOMContentLoaded', function () {
-  showPerson()
-});
-
-function showPerson() {
-  const item = reviews[currentItem];
-  img.src = item.img;
-  author.textContent = item.name;
-  job.textContent = item.job;
-  info.textContent = item.text;
-}
-
-nextBtn.addEventListener('click', function () {
-  currentItem++;
-  if (currentItem > reviews.length - 1) {
-    currentItem = 0;
-  }
-  showPerson();
+document.addEventListener('click', function () {
+  changeReview();
 })
 
+function changeReview() {
+  const id = reviews[index];
+  img.src = id.img;
+  author.textContent = id.name;
+  job.textContent = id.job;
+  info.textContent = id.text
+}
+
 prevBtn.addEventListener('click', function () {
-  currentItem--;
-  if (currentItem < 0) {
-    currentItem = reviews.length - 1;
+  index--;
+
+  if (index < 0) {
+    index = reviews.length - 1;
   }
-  showPerson();
+})
+
+nextBtn.addEventListener('click', function () {
+  index++;
+
+  if (index > reviews.length - 1) {
+    index = 0;
+  }
 })
 
 randomBtn.addEventListener('click', function () {
-  currentItem = Math.floor(Math.random() * reviews.length)
-  showPerson();
+  index = Math.floor(Math.random() * reviews.length)
 })
